@@ -33,6 +33,7 @@ export default class Cost {
             if (remainingStr === symbol.remainingStr) break;
             remainingStr = symbol.remainingStr;
         }
+        this.remainingStr = remainingStr;
     }
 
     parseNextSymbol(str) {
