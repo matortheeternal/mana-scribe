@@ -2,8 +2,8 @@ import Symbol from './Symbol.js';
 
 export default class ColoredPhyrexianManaSymbol extends Symbol {
     static match(str) {
-        return str.match(/^{(h\/[wubrgh]|[wubrg]\/h)}/i)
-            || str.match(/^(h\/[wubrgh]|[wubrg]\/h)/i);
+        return str.match(/^{(h\/[wubrg]|[wubrg]\/h)}/i)
+            || str.match(/^(h\/[wubrg]|[wubrg]\/h)/i);
     }
 
     get colors() {

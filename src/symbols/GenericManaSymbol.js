@@ -7,7 +7,7 @@ export default class GenericManaSymbol extends Symbol {
     }
 
     get type() {
-        return 'generic';
+        return 'genericMana';
     }
 
     cmcValue() {

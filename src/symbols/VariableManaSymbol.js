@@ -7,7 +7,7 @@ export default class VariableManaSymbol extends Symbol {
     }
 
     get type() {
-        return 'variable';
+        return 'variableMana';
     }
 
     cmcValue() {

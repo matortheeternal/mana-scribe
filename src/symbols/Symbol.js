@@ -5,6 +5,13 @@ export default class Symbol {
         throw new NotImplementedError('match');
     }
 
+    static fromString(str) {
+        const matchData = this.match(str);
+        if (!matchData)
+            throw new Error(`Invalid ${this.name} input: ${str}`);
+        return this.parse(matchData, str);
+    }
+
     static parse(match, str) {
         return new this(match, str);
     }
