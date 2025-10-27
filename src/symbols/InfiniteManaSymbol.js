@@ -7,7 +7,7 @@ export default class InfiniteManaSymbol extends Symbol {
     }
 
     get type() {
-        return 'infinity';
+        return 'infiniteMana';
     }
 
     cmcValue() {

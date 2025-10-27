@@ -10,6 +10,10 @@ export default class GenericHybridManaSymbol extends Symbol {
         return this.raw.split('/').filter(c => 'WUBRG'.includes(c));
     }
 
+    get type() {
+        return 'genericHybridMana';
+    }
+
     cmcValue() {
         return 1;
     }
