@@ -1,6 +1,6 @@
 {
   "name": "mana-scribe",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Library for parsing and querying Magic: The Gathering mana costs — with support for CMC, devotion, and color identity.",
   "keywords": [
     "mtg",
@@ -9,7 +9,6 @@
     "cost",
     "parser"
   ],
-  "homepage": "https://github.com/matortheeternal/mana-scribe#readme",
   "bugs": {
     "url": "https://github.com/matortheeternal/mana-scribe/issues"
   },
@@ -31,5 +30,11 @@
   "scripts": {
     "test": "jasmine --config=jasmine.json",
     "coverage": "c8 npm test"
-  }
+  },
+  "files": [
+    "src/",
+    "README.md",
+    "LICENSE",
+    "package.json"
+  ]
 }
