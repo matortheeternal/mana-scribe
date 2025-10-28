@@ -1,6 +1,6 @@
 {
   "name": "mana-scribe",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Library for parsing and querying Magic: The Gathering mana costs — with support for CMC, devotion, and color identity.",
   "keywords": [
     "mtg",
