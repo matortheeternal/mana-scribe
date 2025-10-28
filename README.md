@@ -1,8 +1,9 @@
 # mana-scribe
+[![Tests](https://github.com/matortheeternal/mana-scribe/actions/workflows/tests.yml/badge.svg)](https://github.com/matortheeternal/mana-scribe/actions/workflows/tests.yml) [![codecov](https://codecov.io/github/matortheeternal/mana-scribe/graph/badge.svg?token=Z81O4KMEOH)](https://codecov.io/github/matortheeternal/mana-scribe)
 
  Mana Scribe is a utility for working with Magic: The Gathering mana costs and activation costs.
 
-Supports both brace `{3}{R}{U}` and shortform `3RU` notation.
+Supports both brace `{3}{R/U}` and shortform `3R/U` notation.
 
 ## Features
 
@@ -25,7 +26,7 @@ npm install mana-scribe
 
 ## Usage
 ```js
-import { ManaCost } from 'mtg-mana';
+import { ManaCost } from 'mana-scribe';
 
 const cost = ManaCost.parse('{3}{R}{R}{R}');
 console.log(cost.cmc);                // 6
@@ -47,7 +48,7 @@ console.log(cost.colors);  // ['W','U','B']
 `ActivationCost` offers the same functionality as the `ManaCost` class, but supports additional symbols such as Tap, Untap, and Energy.
 
 ```js
-import { ActivationCost } from 'mtg-mana';
+import { ActivationCost } from 'mana-scribe';
 
 const cost = ActivationCost.parse('{1}{G}{T}');
 console.log(cost.symbols.map(s => s.type)); // ["generic", "colored", "tap"]
@@ -70,7 +71,7 @@ This is an early but complete implementation.
 
 Current priorities:
 - [x] Support core MTG symbols
-- [ ] Add test coverage
+- [x] Add test coverage
 - [ ] Other improvements? TBD
 
 ## License
