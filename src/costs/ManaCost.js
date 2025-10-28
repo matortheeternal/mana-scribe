@@ -13,6 +13,7 @@ import SnowManaSymbol from '../symbols/SnowManaSymbol.js';
 import ThreeColorHybridManaSymbol from '../symbols/ThreeColorHybridManaSymbol.js';
 import TwoColorHybridManaSymbol from '../symbols/TwoColorHybridManaSymbol.js';
 import VariableManaSymbol from '../symbols/VariableManaSymbol.js';
+import {arrayEquals, arrayGreaterThan, arrayLessThan} from '../arrayComparison.js';
 
 export default class ManaCost extends Cost {
     static get allowedSymbols() {
@@ -34,5 +35,17 @@ export default class ManaCost extends Cost {
         return this.symbols.reduce((devotion, sym) => {
             return devotion + (sym.colors.includes(color) ? 1 : 0);
         }, 0);
+    }
+
+    equals(other) {
+        return arrayEquals(this.symbols, other.symbols);
+    }
+
+    greaterThan(other) {
+        return arrayGreaterThan(this.symbols, other.symbols);
+    }
+
+    lessThan(other) {
+        return arrayLessThan(this.symbols, other.symbols);
     }
 }

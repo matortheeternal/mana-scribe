@@ -1,5 +1,28 @@
 import ManaCost from '../../src/costs/ManaCost.js';
 
+beforeAll(() => {
+    jasmine.addMatchers({
+        toEqualCost: () => ({
+            compare: (actual, expected) => ({
+                pass: actual.equals(expected),
+                message: `Expected ${actual.toString()} to equal ${expected.toString()}`
+            })
+        }),
+        toBeGreaterThanCost: () => ({
+            compare: (actual, expected) => ({
+                pass: actual.greaterThan(expected),
+                message: `Expected ${actual.toString()} to be greater than ${expected.toString()}`
+            })
+        }),
+        toBeLessThanCost: () => ({
+            compare: (actual, expected) => ({
+                pass: actual.lessThan(expected),
+                message: `Expected ${actual.toString()} to be less than ${expected.toString()}`
+            })
+        })
+    });
+});
+
 describe('ManaCost (E2E)', () => {
     describe('parsing simple costs', () => {
         it('parses generic numbers', () => {
@@ -114,9 +137,82 @@ describe('ManaCost (E2E)', () => {
         });
     });
 
+    describe('comparison', () => {
+        it('treats identical costs as equal', () => {
+            const a = ManaCost.parse('3BBB');
+            const b = ManaCost.parse('3BBB');
+            expect(a).toEqualCost(b);
+            expect(a).not.toBeGreaterThanCost(b);
+            expect(a).not.toBeLessThanCost(b);
+        });
+
+        it('detects superset correctly (greaterThan)', () => {
+            const a = ManaCost.parse('3BBB'); // has extra generic
+            const b = ManaCost.parse('BBB');
+            expect(a).toBeGreaterThanCost(b);
+            expect(b).toBeLessThanCost(a);
+            expect(a).not.toBeLessThanCost(b);
+            expect(b).not.toBeGreaterThanCost(a);
+        });
+
+        it('works with extra colored mana', () => {
+            const a = ManaCost.parse('WW');
+            const b = ManaCost.parse('W');
+            expect(a).toBeGreaterThanCost(b);
+            expect(b).toBeLessThanCost(a);
+        });
+
+        it('does not allow generic to cover colored costs', () => {
+            const a = ManaCost.parse('{2}W');  // 2 generic + 1 white
+            const b = ManaCost.parse('WW');    // 2 white
+            expect(a).not.toBeGreaterThanCost(b);
+            expect(a).not.toEqualCost(b);
+        });
+
+        it('treats disjoint colored costs as not comparable', () => {
+            const a = ManaCost.parse('W');
+            const b = ManaCost.parse('U');
+            expect(a).not.toBeGreaterThanCost(b);
+            expect(b).not.toBeGreaterThanCost(a);
+            expect(a).not.toEqualCost(b);
+        });
+
+        it('compares generic counts correctly', () => {
+            const a = ManaCost.parse('{3}');
+            const b = ManaCost.parse('{2}');
+            const c = ManaCost.parse('{3}');
+            expect(a).toBeGreaterThanCost(b);
+            expect(b).toBeLessThanCost(a);
+            expect(a).toEqualCost(c);
+        });
+
+        it('empty vs non-empty costs', () => {
+            const a = ManaCost.parse('');
+            const b = ManaCost.parse('W');
+            expect(a).toBeLessThanCost(b);
+            expect(b).toBeGreaterThanCost(a);
+            expect(a).not.toEqualCost(b);
+        });
+
+        it('handles variable mana (X) as incomparable', () => {
+            const a = ManaCost.parse('X');
+            const b = ManaCost.parse('3');
+            expect(a).not.toEqualCost(b);
+            expect(a).not.toBeGreaterThanCost(b);
+            expect(a).not.toBeLessThanCost(b);
+        });
+
+        it('handles infinite mana (I)', () => {
+            const a = ManaCost.parse('I');
+            const b = ManaCost.parse('100');
+            expect(a).toBeGreaterThanCost(b);
+            expect(b).toBeLessThanCost(a);
+        });
+    });
+
     describe('error handling', () => {
         it('stops parsing at invalid symbol and sets remainingStr', () => {
-            const cost = ManaCost.parse('WQZ'); // W is valid, Q is not a mana symbol here
+            const cost = ManaCost.parse('WQZ');
             expect(cost.symbols[0].type).toBe('coloredMana');
             expect(cost.remainingStr).toBe('QZ');
         });

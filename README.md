@@ -14,6 +14,7 @@ Supports both brace `{3}{R/U}` and shortform `3R/U` notation.
   - Converted mana cost
   - Color identity
   - Devotion
+- Compare mana costs to evaluate if they are equal, greater than, or less than each other.
 - Extensible design — add new symbol types by subclassing
 
 Note: When the parser encounters an unrecognized symbol it stops parsing and returns the symbols it parsed so far.  You can access the unparsed string component through the property `remainingStr`.
@@ -44,8 +45,24 @@ console.log(cost.cmc);     // 3
 console.log(cost.colors);  // ['W','U','B']
 ```
 
+### Comparison example
+The `ManaCost` class supports equality and comparison operators under superset semantics:
+
+- `equals(other)` → true if the costs are exactly the same
+- `greaterThan(other)` → true if this cost includes all symbols of other plus additional ones, or generic mana cost is higher.
+- `lessThan(other)` → true if this cost is a strict subset of other, or generic mana cost is lower.
+
+```js
+const a = ManaCost.parse('{3}{B}{B}{B}');
+const b = ManaCost.parse('{1}{B}{B}{B}');
+
+console.log(a.equals(b));       // false
+console.log(a.greaterThan(b));  // true
+console.log(b.lessThan(a));     // true
+```
+
 ## Activation costs
-`ActivationCost` offers the same functionality as the `ManaCost` class, but supports additional symbols such as Tap, Untap, and Energy.
+`ActivationCost` offers the same functionality as the `ManaCost` class, but supports additional symbols such as Tap, Untap, and Energy.  It does not have comparison functions.
 
 ```js
 import { ActivationCost } from 'mana-scribe';
@@ -72,6 +89,7 @@ This is an early but complete implementation.
 Current priorities:
 - [x] Support core MTG symbols
 - [x] Add test coverage
+- [x] Add cost comparison
 - [ ] Other improvements? TBD
 
 ## License
