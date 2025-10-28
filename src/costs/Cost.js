@@ -20,10 +20,6 @@ export default class Cost {
         return [...set];
     }
 
-    get colorIdentity() {
-        return this.colors;
-    }
-
     parseSymbols(str) {
         let remainingStr = str.trim();
         while (remainingStr.length) {
