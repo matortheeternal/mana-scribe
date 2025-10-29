@@ -1,9 +1,9 @@
 import Symbol from './Symbol.js';
+import { msr } from '../services/regExpService.js';
 
 export default class ColoredPhyrexianManaSymbol extends Symbol {
     static match(str) {
-        return str.match(/^{(h\/[wubrg]|[wubrg]\/h)}/i)
-            || str.match(/^(h\/[wubrg]|[wubrg]\/h)/i);
+        return str.match(msr`(h\/\c|\c\/h)`);
     }
 
     get colors() {

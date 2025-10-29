@@ -1,3 +1,4 @@
+import '../../src/index.js';
 import FourColorHybridManaSymbol from '../../src/symbols/FourColorHybridManaSymbol.js';
 
 describe('FourColorHybridManaSymbol', () => {

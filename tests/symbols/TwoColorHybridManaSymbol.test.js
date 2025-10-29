@@ -1,3 +1,4 @@
+import '../../src/index.js';
 import TwoColorHybridManaSymbol from '../../src/symbols/TwoColorHybridManaSymbol.js';
 
 describe('TwoColorHybridManaSymbol', () => {

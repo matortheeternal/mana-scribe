@@ -1,9 +1,9 @@
 import Symbol from './Symbol.js';
+import { msr } from '../services/regExpService.js';
 
 export default class HalfColoredManaSymbol extends Symbol {
     static match(str) {
-        return str.match(/^{\|[WUBRGS]}/i)
-            || str.match(/^\|[WUBRGS]/i);
+        return str.match(msr`\|(\c|\T)`);
     }
 
     get colors() {

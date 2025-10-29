@@ -9,7 +9,7 @@ import GenericHybridManaSymbol from '../symbols/GenericHybridManaSymbol.js';
 import GenericManaSymbol from '../symbols/GenericManaSymbol.js';
 import HalfColoredManaSymbol from '../symbols/HalfColoredManaSymbol.js';
 import InfiniteManaSymbol from '../symbols/InfiniteManaSymbol.js';
-import SnowManaSymbol from '../symbols/SnowManaSymbol.js';
+import TypedManaSymbol from '../symbols/TypedManaSymbol.js';
 import ThreeColorHybridManaSymbol from '../symbols/ThreeColorHybridManaSymbol.js';
 import TwoColorHybridManaSymbol from '../symbols/TwoColorHybridManaSymbol.js';
 import VariableManaSymbol from '../symbols/VariableManaSymbol.js';
@@ -22,7 +22,7 @@ export default class ManaCost extends Cost {
             FourColorHybridManaSymbol, ThreeColorHybridManaSymbol, TwoColorHybridManaSymbol,
             ColorlessPhyrexianManaSymbol, HalfColoredManaSymbol,
             GenericManaSymbol, VariableManaSymbol,
-            InfiniteManaSymbol, SnowManaSymbol,
+            InfiniteManaSymbol, TypedManaSymbol,
             ColoredManaSymbol, ColorlessManaSymbol
         ];
     }

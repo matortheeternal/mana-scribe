@@ -1,4 +1,4 @@
-import ManaCost from '../../src/costs/ManaCost.js';
+import { ManaCost } from '../../src/index.js';
 
 beforeAll(() => {
     jasmine.addMatchers({
@@ -96,7 +96,7 @@ describe('ManaCost (E2E)', () => {
 
         it('parses snow mana', () => {
             const cost = ManaCost.parse('S');
-            expect(cost.symbols[0].type).toBe('snowMana');
+            expect(cost.symbols[0].type).toBe('typedMana');
             expect(cost.cmc).toBe(1);
         });
 
@@ -116,7 +116,7 @@ describe('ManaCost (E2E)', () => {
             expect(types).toContain('genericHybridMana');
             expect(types).toContain('twoColorHybridMana');
             expect(types).toContain('colorlessPhyrexianMana');
-            expect(types).toContain('snowMana');
+            expect(types).toContain('typedMana');
             expect(types).toContain('variableMana');
             expect(types).toContain('colorlessMana');
             expect(cost.cmc).toBe(13);

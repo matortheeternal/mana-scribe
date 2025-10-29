@@ -1,3 +1,4 @@
+import '../../src/index.js';
 import EnergySymbol from '../../src/symbols/EnergySymbol.js';
 
 describe('EnergySymbol', () => {

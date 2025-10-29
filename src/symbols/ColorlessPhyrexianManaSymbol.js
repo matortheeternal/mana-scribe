@@ -1,9 +1,9 @@
 import ColorlessManaSymbol from './ColorlessManaSymbol.js';
+import { msr } from '../services/regExpService.js';
 
 export default class ColorlessPhyrexianManaSymbol extends ColorlessManaSymbol {
     static match(str) {
-        return str.match(/^{(h\/c|c\/h|h)}/i)
-            || str.match(/^(h\/c|c\/h|h)/i);
+        return str.match(msr`(h\/c|c\/h|h)`);
     }
 
     get type() {

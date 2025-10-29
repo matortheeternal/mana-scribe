@@ -4,3 +4,17 @@ export class NotImplementedError extends Error {
         this.name = 'NotImplementedError';
     }
 }
+
+export class SchemaError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = 'SchemaError';
+    }
+}
+
+export class RegistryError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = 'RegistryError';
+    }
+}
