@@ -1,7 +1,7 @@
 # mana-scribe
 [![Tests](https://github.com/matortheeternal/mana-scribe/actions/workflows/tests.yml/badge.svg)](https://github.com/matortheeternal/mana-scribe/actions/workflows/tests.yml) [![codecov](https://codecov.io/github/matortheeternal/mana-scribe/graph/badge.svg?token=Z81O4KMEOH)](https://codecov.io/github/matortheeternal/mana-scribe)
 
- Mana Scribe is a utility for working with Magic: The Gathering mana costs and activation costs.
+Mana Scribe is a utility for working with Magic: The Gathering mana costs and activation costs.
 
 Supports both brace `{3}{R/U}` and shortform `3R/U` notation.
 
@@ -97,22 +97,11 @@ You can add custom types of mana with `manaTypeRegistry.add`.
 ```js
 import { manaTypeRegistry, ActivationCost } from 'mana-scribe';
 
-manaTypeRegistry.add({ id: 'A', name: 'Artifial' }); // mana produced by an artifact
-const cost = ActivationCost.parse('{A}{H/A}{T}');
-console.log(cost.symbols.map(s => s.type)); // ["coloredMana", "phyrexianColoredMana", "tap"]
+manaTypeRegistry.add({ id: 'A', name: 'Artificial' }); // mana produced by an artifact
+const cost = ActivationCost.parse('{A}{A}{T}');
+console.log(cost.symbols.map(s => s.type)); // ["typedMana", "typedMana", "tap"]
 console.log(cost.colors);  // []
 ```
-
-## Project Status
-
-This is an early but complete implementation.
-
-Current priorities:
-- [x] Support core MTG symbols
-- [x] Add test coverage
-- [x] Add cost comparison
-- [x] Add support for custom colors and mana types
-- [ ] Other improvements? TBD
 
 ## License
 
