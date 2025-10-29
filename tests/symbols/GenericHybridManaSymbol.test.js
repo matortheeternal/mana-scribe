@@ -1,3 +1,4 @@
+import '../../src/index.js';
 import GenericHybridManaSymbol from '../../src/symbols/GenericHybridManaSymbol.js';
 
 describe('GenericHybridManaSymbol', () => {

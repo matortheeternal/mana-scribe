@@ -1,3 +1,4 @@
+import '../../src/index.js';
 import InfiniteManaSymbol from '../../src/symbols/InfiniteManaSymbol.js';
 
 describe('InfiniteManaSymbol', () => {

@@ -1,9 +1,10 @@
 import Symbol from './Symbol.js';
 import { msr } from '../services/regExpService.js';
 
-export default class ColorlessManaSymbol extends Symbol {
+// used for typed mana, like snow or legendary
+export default class TypedManaSymbol extends Symbol {
     static match(str) {
-        return str.match(msr`C`);
+        return str.match(msr`\T`);
     }
 
     get colors() {
@@ -11,7 +12,7 @@ export default class ColorlessManaSymbol extends Symbol {
     }
 
     get type() {
-        return 'colorlessMana';
+        return 'typedMana';
     }
 
     cmcValue() {

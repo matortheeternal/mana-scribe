@@ -1,3 +1,4 @@
+import '../../src/index.js';
 import HalfColoredManaSymbol from '../../src/symbols/HalfColoredManaSymbol.js';
 
 describe('HalfColoredManaSymbol', () => {

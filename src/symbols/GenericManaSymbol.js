@@ -1,9 +1,9 @@
 import Symbol from './Symbol.js';
+import { msr } from '../services/regExpService.js';
 
 export default class GenericManaSymbol extends Symbol {
     static match(str) {
-        return str.match(/^{[0-9][0-9]?}/)
-            || str.match(/^[0-9][0-9]?/);
+        return str.match(msr`[0-9][0-9]?`);
     }
 
     get type() {

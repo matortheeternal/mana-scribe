@@ -1,9 +1,9 @@
 import HybridManaSymbol from './HybridManaSymbol.js';
+import { msr } from '../services/regExpService.js';
 
 export default class FiveColorHybridManaSymbol extends HybridManaSymbol {
     static match(str) {
-        return super.match(str, 5, /^{[WUBRG](\/[WUBRG]){4}}/i)
-            || super.match(str, 5, /^[WUBRG](\/[WUBRG]){4}/i);
+        return super.match(str, 5, msr`\c(\/\c){4}`);
     }
 
     get type() {

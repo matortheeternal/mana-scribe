@@ -1,3 +1,4 @@
+import '../../src/index.js';
 import TapSymbol from '../../src/symbols/TapSymbol.js';
 
 describe('TapSymbol', () => {

@@ -1,4 +1,4 @@
-import ActivationCost from '../../src/costs/ActivationCost.js';
+import { ActivationCost } from '../../src/index.js';
 
 describe('ActivationCost (E2E)', () => {
     describe('parsing non-mana symbols', () => {

@@ -1,3 +1,4 @@
+import '../../src/index.js';
 import ColorlessPhyrexianManaSymbol from '../../src/symbols/ColorlessPhyrexianManaSymbol.js';
 
 describe('ColorlessPhyrexianManaSymbol', () => {

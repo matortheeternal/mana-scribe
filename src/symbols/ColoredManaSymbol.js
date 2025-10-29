@@ -1,9 +1,9 @@
 import Symbol from './Symbol.js';
+import { msr } from '../services/regExpService.js';
 
 export default class ColoredManaSymbol extends Symbol {
     static match(str) {
-        return str.match(/^{[WUBRG]}/i)
-            || str.match(/^[WUBRG]/i);
+        return str.match(msr`\c`)
     }
 
     get colors() {

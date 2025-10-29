@@ -1,3 +1,4 @@
+import '../../src/index.js';
 import Symbol from '../../src/symbols/Symbol.js';
 import { NotImplementedError } from '../../src/customErrors.js';
 

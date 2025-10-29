@@ -1,3 +1,4 @@
+import '../../src/index.js';
 import FiveColorHybridManaSymbol from '../../src/symbols/FiveColorHybridManaSymbol.js';
 
 describe('FiveColorHybridManaSymbol', () => {

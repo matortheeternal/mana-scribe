@@ -1,3 +1,4 @@
+import '../../src/index.js';
 import UntapSymbol from '../../src/symbols/UntapSymbol.js';
 
 describe('UntapSymbol', () => {

@@ -1,9 +1,9 @@
 import Symbol from './Symbol.js';
+import { msr } from '../services/regExpService.js';
 
 export default class GenericHybridManaSymbol extends Symbol {
     static match(str) {
-        return str.match(/^{\d\/([WUBRGC])}/i)
-            || str.match(/^\d\/([WUBRGC])/i)
+        return str.match(msr`\d\/(\c|c)`);
     }
 
     get colors() {

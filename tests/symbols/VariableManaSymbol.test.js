@@ -1,3 +1,4 @@
+import '../../src/index.js';
 import VariableManaSymbol from '../../src/symbols/VariableManaSymbol.js';
 
 describe('VariableManaSymbol', () => {

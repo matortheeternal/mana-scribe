@@ -14,8 +14,8 @@ Supports both brace `{3}{R/U}` and shortform `3R/U` notation.
   - Converted mana cost
   - Color identity
   - Devotion
-- Compare mana costs to evaluate if they are equal, greater than, or less than each other.
-- Extensible design — add new symbol types by subclassing
+- Compare mana costs (equality, greater than, less than)
+- Easily add custom colors or types of mana
 
 Note: When the parser encounters an unrecognized symbol it stops parsing and returns the symbols it parsed so far.  You can access the unparsed string component through the property `remainingStr`.
 
@@ -61,26 +61,47 @@ console.log(a.greaterThan(b));  // true
 console.log(b.lessThan(a));     // true
 ```
 
-## Activation costs
+
+### Activation costs
 `ActivationCost` offers the same functionality as the `ManaCost` class, but supports additional symbols such as Tap, Untap, and Energy.  It does not have comparison functions.
 
 ```js
 import { ActivationCost } from 'mana-scribe';
 
 const cost = ActivationCost.parse('{1}{G}{T}');
-console.log(cost.symbols.map(s => s.type)); // ["generic", "colored", "tap"]
+console.log(cost.symbols.map(s => s.type)); // ["genericMana", "coloredMana", "tap"]
 console.log(cost.toString(true));           // "{1}{G}{T}"
 ```
 
 ## Extending
 
-The library is class-based. Each symbol type is a subclass of a base Symbol class and implements:
+### Custom colors
 
-- `static match(str)` → returns a regex match object if it applies
-- `get colors()` → returns an array of the colors associated with the symbol
-- `cmcValue()` → returns an integer corresponding to how much this symbol contributes to a card's overall converted mana cost.
+You can add custom colors of mana with `colorRegistry.add`.
 
-This makes it easy to add custom symbols or patch existing ones in your own project.
+```js
+import { colorRegistry, ManaCost } from 'mana-scribe';
+
+colorRegistry.add({ id: 'P', name: 'Purple' });
+const cost = ManaCost.parse('{3}{R/P}{P}');
+console.log(cost.symbols.map(s => s.type)); // ["genericMana", "twoColorHybridMana", "coloredMana"]
+console.log(cost.cmc); // 5
+console.log(cost.colors);  // ['R','P']
+console.log(cost.getDevotionTo('P')); // 2
+```
+
+### Custom mana types
+
+You can add custom types of mana with `manaTypeRegistry.add`.
+
+```js
+import { manaTypeRegistry, ActivationCost } from 'mana-scribe';
+
+manaTypeRegistry.add({ id: 'A', name: 'Artifial' }); // mana produced by an artifact
+const cost = ActivationCost.parse('{A}{H/A}{T}');
+console.log(cost.symbols.map(s => s.type)); // ["coloredMana", "phyrexianColoredMana", "tap"]
+console.log(cost.colors);  // []
+```
 
 ## Project Status
 
@@ -90,6 +111,7 @@ Current priorities:
 - [x] Support core MTG symbols
 - [x] Add test coverage
 - [x] Add cost comparison
+- [x] Add support for custom colors and mana types
 - [ ] Other improvements? TBD
 
 ## License
