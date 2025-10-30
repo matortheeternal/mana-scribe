@@ -3,7 +3,7 @@ import { msr } from '../services/regExpService.js';
 
 export default class ColoredPhyrexianManaSymbol extends Symbol {
     static match(str) {
-        return str.match(msr`(h\/\c|\c\/h)`);
+        return str.match(msr`(H\/\c|\c\/H)`);
     }
 
     get colors() {

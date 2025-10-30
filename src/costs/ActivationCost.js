@@ -9,6 +9,7 @@ import FourColorHybridManaSymbol from '../symbols/FourColorHybridManaSymbol.js';
 import GenericHybridManaSymbol from '../symbols/GenericHybridManaSymbol.js';
 import GenericManaSymbol from '../symbols/GenericManaSymbol.js';
 import HalfManaSymbol from '../symbols/HalfManaSymbol.js';
+import HybridPhyrexianManaSymbol from '../symbols/HybridPhyrexianManaSymbol.js';
 import InfiniteManaSymbol from '../symbols/InfiniteManaSymbol.js';
 import TypedManaSymbol from '../symbols/TypedManaSymbol.js';
 import TapSymbol from '../symbols/TapSymbol.js';
@@ -20,12 +21,12 @@ import VariableManaSymbol from '../symbols/VariableManaSymbol.js';
 export default class ActivationCost extends Cost {
     static get allowedSymbols() {
         return [
-            ColoredPhyrexianManaSymbol, GenericHybridManaSymbol, FiveColorHybridManaSymbol,
-            FourColorHybridManaSymbol, ThreeColorHybridManaSymbol, TwoColorHybridManaSymbol,
-            ColorlessPhyrexianManaSymbol, HalfManaSymbol,
-            GenericManaSymbol, VariableManaSymbol,
-            InfiniteManaSymbol, TypedManaSymbol,
-            ColoredManaSymbol, ColorlessManaSymbol,
+            HybridPhyrexianManaSymbol, ColoredPhyrexianManaSymbol,
+            GenericHybridManaSymbol, FiveColorHybridManaSymbol,
+            FourColorHybridManaSymbol, ThreeColorHybridManaSymbol,
+            TwoColorHybridManaSymbol, HalfManaSymbol, ColorlessPhyrexianManaSymbol,
+            GenericManaSymbol, VariableManaSymbol, InfiniteManaSymbol,
+            TypedManaSymbol, ColoredManaSymbol, ColorlessManaSymbol,
             ExtraSymbol, TapSymbol, UntapSymbol,
         ];
     }

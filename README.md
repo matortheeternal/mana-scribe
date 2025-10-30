@@ -8,14 +8,14 @@ Supports both brace `{3}{R/U}` and shortform `3R/U` notation.
 ## Features
 
 - Parse MTG mana costs into structured objects
-- Supports all major symbols: generic, colored, hybrid, phyrexian, snow, energy, tap/untap, variable
+- Supports all major symbols: generic, colored, 2-5 color hybrid, phyrexian, generic hybrid, phyrexian hybrid, snow, energy, tap/untap, variable
 - Works with both Scryfall braces and shortform notation
 - Compute:
   - Converted mana cost
   - Color identity
   - Devotion
 - Compare mana costs (equality, greater than, less than)
-- Easily add custom colors or types of mana
+- Easily add custom colors, types of mana, or other extra symbols
 
 Note: When the parser encounters an unrecognized symbol it stops parsing and returns the symbols it parsed so far.  You can access the unparsed string component through the property `remainingStr`.
 
@@ -77,12 +77,12 @@ console.log(cost.toString(true));           // "{1}{G}{T}"
 
 ### Custom colors
 
-You can add custom colors of mana with `manaRegistry.addColor`.
+You can add custom colors of mana with `symbolRegistry.addColor`.
 
 ```js
-import { manaRegistry, ManaCost } from 'mana-scribe';
+import { symbolRegistry, ManaCost } from 'mana-scribe';
 
-manaRegistry.addColor({ id: 'P', name: 'Purple' });
+symbolRegistry.addColor({ id: 'P', name: 'Purple' });
 const cost = ManaCost.parse('{3}{R/P}{P}');
 console.log(cost.symbols.map(s => s.type)); // ["genericMana", "twoColorHybridMana", "coloredMana"]
 console.log(cost.cmc); // 5
@@ -92,14 +92,27 @@ console.log(cost.getDevotionTo('P')); // 2
 
 ### Custom mana types
 
-You can add custom types of mana with `manaRegistry.addManaType`. This is for mana produced by specific sources, like snow mana.
+You can add custom types of mana with `symbolRegistry.addManaType`. This is for mana produced by specific sources, like snow mana.
 
 ```js
-import { manaRegistry, ActivationCost } from 'mana-scribe';
+import { symbolRegistry, ActivationCost } from 'mana-scribe';
 
-manaRegistry.addManaType({ id: 'A', name: 'Artificial' }); // mana produced by an artifact
+symbolRegistry.addManaType({ id: 'A', name: 'Artificial' }); // mana produced by an artifact
 const cost = ActivationCost.parse('{A}{A}{T}');
 console.log(cost.symbols.map(s => s.type)); // ["typedMana", "typedMana", "tap"]
+console.log(cost.colors);  // []
+```
+
+### Extra symbols
+
+You can add additional symbols for use in activation costs with `symbolRegistry.addExtraSym`. This is used for things like the energy symbol.
+
+```js
+import { symbolRegistry, ActivationCost } from 'mana-scribe';
+
+symbolRegistry.addManaType({ id: '\\@', name: 'Chaos' });
+const cost = ActivationCost.parse('{@}');
+console.log(cost.symbols.map(s => s.type)); // ["extra"]
 console.log(cost.colors);  // []
 ```
 

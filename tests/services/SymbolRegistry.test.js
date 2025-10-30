@@ -39,6 +39,9 @@ describe('Symbol registry', () => {
             expect(() => sr.addColor({ id: 'L', name: 'Lilac' })).toThrowError(
                 AlreadyRegisteredError, 'ManaType with id "L" already registered'
             );
+            expect(() => sr.addColor({ id: 'E', name: 'Evil' })).toThrowError(
+                AlreadyRegisteredError, 'ExtraSym with id "E" already registered'
+            );
         });
 
         it('throws if id is a reserved character', () => {
@@ -77,7 +80,7 @@ describe('Symbol registry', () => {
             expect(() => sr.addManaType({ id: 'JJ', name: 'Jump' })).toThrowError(
                 SchemaError, 'ManaType property "id" length must be 1'
             );
-            expect(() => sr.addColor({ id: '\\$', name: 'Money' })).not.toThrowError(
+            expect(() => sr.addManaType({ id: '\\$', name: 'Money' })).not.toThrowError(
                 SchemaError, 'ManaType property "id" length must be 1'
             );
         });
@@ -88,6 +91,9 @@ describe('Symbol registry', () => {
             );
             expect(() => sr.addManaType({ id: 'L', name: 'Lilac' })).toThrowError(
                 AlreadyRegisteredError, 'ManaType with id "L" already registered'
+            );
+            expect(() => sr.addManaType({ id: 'E', name: 'Evil' })).toThrowError(
+                AlreadyRegisteredError, 'ExtraSym with id "E" already registered'
             );
         });
 
@@ -100,6 +106,59 @@ describe('Symbol registry', () => {
         it('throws if name is not provided', () => {
             expect(() => sr.addManaType({ id: 'P' })).toThrowError(
                 SchemaError, 'ManaType must have a string property "name"'
+            );
+        });
+    });
+
+    describe('addExtraSym', () => {
+        it('adds a new extra symbol when using correct schema', () => {
+            sr.addExtraSym({ id: '\\@', name: 'Chaos' });
+            const cost = ActivationCost.parse('{@}{@}{T}');
+            expect(cost.colors).toEqual([]);
+            expect(cost.toString(true)).toBe('{@}{@}{T}');
+        });
+
+        it('throws if string id property is not provided', () => {
+            expect(() => sr.addExtraSym({ name: 'New Type' })).toThrowError(
+                SchemaError, 'ExtraSym must have a string property "id"'
+            );
+            expect(() => sr, 'ExtraSym must have a string property "id"'
+            );
+            expect(() => sr.addExtraSym({ id: '', name: 'Unknown' })).toThrowError(
+                SchemaError, 'ExtraSym must have a string property "id"'
+            );
+        });
+
+        it('throws if id length is not 1, unless it is a single char escape', () => {
+            expect(() => sr.addExtraSym({ id: 'JJ', name: 'Jump' })).toThrowError(
+                SchemaError, 'ExtraSym property "id" length must be 1'
+            );
+            expect(() => sr.addExtraSym({ id: '\\$', name: 'Money' })).not.toThrowError(
+                SchemaError, 'ExtraSym property "id" length must be 1'
+            );
+        });
+
+        it('throws if id was already registered', () => {
+            expect(() => sr.addExtraSym({ id: 'W', name: 'Willow' })).toThrowError(
+                AlreadyRegisteredError, 'Color with id "W" already registered'
+            );
+            expect(() => sr.addExtraSym({ id: 'L', name: 'Lilac' })).toThrowError(
+                AlreadyRegisteredError, 'ManaType with id "L" already registered'
+            );
+            expect(() => sr.addExtraSym({ id: 'E', name: 'Evil' })).toThrowError(
+                AlreadyRegisteredError, 'ExtraSym with id "E" already registered'
+            );
+        });
+
+        it('throws if id is a reserved character', () => {
+            expect(() => sr.addExtraSym({ id: 'T', name: 'Turbid' })).toThrowError(
+                SchemaError, 'ExtraSym id "T" is not allowed (used for Tap)'
+            );
+        });
+
+        it('throws if name is not provided', () => {
+            expect(() => sr.addExtraSym({ id: 'P' })).toThrowError(
+                SchemaError, 'ExtraSym must have a string property "name"'
             );
         });
     });

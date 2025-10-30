@@ -12,18 +12,20 @@ import InfiniteManaSymbol from '../symbols/InfiniteManaSymbol.js';
 import TypedManaSymbol from '../symbols/TypedManaSymbol.js';
 import ThreeColorHybridManaSymbol from '../symbols/ThreeColorHybridManaSymbol.js';
 import TwoColorHybridManaSymbol from '../symbols/TwoColorHybridManaSymbol.js';
+import HybridPhyrexianManaSymbol from '../symbols/HybridPhyrexianManaSymbol.js';
 import VariableManaSymbol from '../symbols/VariableManaSymbol.js';
 import { arrayEquals, arrayGreaterThan, arrayLessThan } from '../arrayComparison.js';
 
 export default class ManaCost extends Cost {
     static get allowedSymbols() {
         return [
-            ColoredPhyrexianManaSymbol, GenericHybridManaSymbol, FiveColorHybridManaSymbol,
-            FourColorHybridManaSymbol, ThreeColorHybridManaSymbol, TwoColorHybridManaSymbol,
-            ColorlessPhyrexianManaSymbol, HalfManaSymbol,
-            GenericManaSymbol, VariableManaSymbol,
-            InfiniteManaSymbol, TypedManaSymbol,
-            ColoredManaSymbol, ColorlessManaSymbol
+            HybridPhyrexianManaSymbol, ColoredPhyrexianManaSymbol,
+            GenericHybridManaSymbol, FiveColorHybridManaSymbol,
+            FourColorHybridManaSymbol, ThreeColorHybridManaSymbol,
+            TwoColorHybridManaSymbol, HalfManaSymbol,
+            ColorlessPhyrexianManaSymbol,
+            GenericManaSymbol, VariableManaSymbol, InfiniteManaSymbol,
+            TypedManaSymbol, ColoredManaSymbol, ColorlessManaSymbol
         ];
     }
 
