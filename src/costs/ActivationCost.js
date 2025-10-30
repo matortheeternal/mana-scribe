@@ -3,7 +3,7 @@ import ColoredManaSymbol from '../symbols/ColoredManaSymbol.js';
 import ColoredPhyrexianManaSymbol from '../symbols/ColoredPhyrexianManaSymbol.js';
 import ColorlessManaSymbol from '../symbols/ColorlessManaSymbol.js';
 import ColorlessPhyrexianManaSymbol from '../symbols/ColorlessPhyrexianManaSymbol.js';
-import EnergySymbol from '../symbols/EnergySymbol.js';
+import ExtraSymbol from '../symbols/ExtraSymbol.js';
 import FiveColorHybridManaSymbol from '../symbols/FiveColorHybridManaSymbol.js';
 import FourColorHybridManaSymbol from '../symbols/FourColorHybridManaSymbol.js';
 import GenericHybridManaSymbol from '../symbols/GenericHybridManaSymbol.js';
@@ -26,7 +26,7 @@ export default class ActivationCost extends Cost {
             GenericManaSymbol, VariableManaSymbol,
             InfiniteManaSymbol, TypedManaSymbol,
             ColoredManaSymbol, ColorlessManaSymbol,
-            EnergySymbol, TapSymbol, UntapSymbol,
+            ExtraSymbol, TapSymbol, UntapSymbol,
         ];
     }
 }

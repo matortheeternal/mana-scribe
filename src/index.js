@@ -1,6 +1,6 @@
 import ActivationCost from './costs/ActivationCost.js';
 import ManaCost from './costs/ManaCost.js';
-import manaRegistry from './services/ManaRegistry.js';
+import symbolRegistry from './services/SymbolRegistry.js';
 
 const baseColors = [
     { id: 'W', name: 'White' },
@@ -15,7 +15,12 @@ const baseTypes = [
     { id: 'L', name: 'Legendary' },
 ];
 
-baseColors.forEach(color => manaRegistry.addColor(color));
-baseTypes.forEach(type => manaRegistry.addManaType(type));
+const extraSymbols = [
+    { id: 'E', name: 'Energy' }
+];
 
-export { ActivationCost, ManaCost, manaRegistry };
+baseColors.forEach(color => symbolRegistry.addColor(color));
+baseTypes.forEach(type => symbolRegistry.addManaType(type));
+extraSymbols.forEach(type => symbolRegistry.addExtraSym(type));
+
+export { ActivationCost, ManaCost, symbolRegistry };

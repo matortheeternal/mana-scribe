@@ -13,7 +13,7 @@ import TypedManaSymbol from '../symbols/TypedManaSymbol.js';
 import ThreeColorHybridManaSymbol from '../symbols/ThreeColorHybridManaSymbol.js';
 import TwoColorHybridManaSymbol from '../symbols/TwoColorHybridManaSymbol.js';
 import VariableManaSymbol from '../symbols/VariableManaSymbol.js';
-import {arrayEquals, arrayGreaterThan, arrayLessThan} from '../arrayComparison.js';
+import { arrayEquals, arrayGreaterThan, arrayLessThan } from '../arrayComparison.js';
 
 export default class ManaCost extends Cost {
     static get allowedSymbols() {

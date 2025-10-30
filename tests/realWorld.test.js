@@ -63,7 +63,7 @@ describe('Real-world integration', () => {
         it('energy then text (stops at comma)', () => {
             const str = '{E}, {T}: Deal 1 damage.';
             const cost = ActivationCost.parse(str);
-            expect(cost.symbols.map(s => s.type)).toEqual(['energy']);
+            expect(cost.symbols.map(s => s.type)).toEqual(['extra']);
             expect(cost.colors).toEqual([]);
             expect(cost.remainingStr).toBe(', {T}: Deal 1 damage.');
         });
