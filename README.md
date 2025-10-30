@@ -32,7 +32,6 @@ import { ManaCost } from 'mana-scribe';
 const cost = ManaCost.parse('{3}{R}{R}{R}');
 console.log(cost.cmc);                // 6
 console.log(cost.colors);             // ['R']
-console.log(cost.colorIdentity);      // ['R']
 console.log(cost.getDevotionTo('R')); // 3
 
 console.log(cost.toString(true));     // "{3}{R}{R}{R}"
@@ -41,7 +40,7 @@ console.log(cost.toString(false));    // "3RRR"
 ### Shortform example
 ```js
 const cost = ManaCost.parse('2WU/B');
-console.log(cost.cmc);     // 3
+console.log(cost.cmc);     // 4
 console.log(cost.colors);  // ['W','U','B']
 ```
 
