@@ -1,18 +1,20 @@
 import Symbol from './Symbol.js';
 import { msr } from '../services/regExpService.js';
+import { manaRegistry } from '../index.js';
 
-export default class HalfColoredManaSymbol extends Symbol {
+export default class HalfManaSymbol extends Symbol {
     static match(str) {
         return str.match(msr`\|(\c|\T)`);
     }
 
     get colors() {
         const c = this.raw[1];
-        return c === 'S' ? [] : [c];
+        const colorIds = manaRegistry.getColorKeys();
+        return colorIds.includes(c) ? [c] : [];
     }
 
     get type() {
-        return 'halfColoredMana';
+        return 'halfMana';
     }
 
     cmcValue() {

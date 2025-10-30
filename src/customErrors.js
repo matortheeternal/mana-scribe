@@ -12,9 +12,9 @@ export class SchemaError extends Error {
     }
 }
 
-export class RegistryError extends Error {
-    constructor(message) {
-        super(message);
-        this.name = 'RegistryError';
+export class AlreadyRegisteredError extends Error {
+    constructor(label, id) {
+        super(`${label} with id "${id}" already registered`);
+        this.name = 'AlreadyRegisteredError';
     }
 }

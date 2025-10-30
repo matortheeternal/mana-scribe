@@ -77,12 +77,12 @@ console.log(cost.toString(true));           // "{1}{G}{T}"
 
 ### Custom colors
 
-You can add custom colors of mana with `colorRegistry.add`.
+You can add custom colors of mana with `manaRegistry.addColor`.
 
 ```js
-import { colorRegistry, ManaCost } from 'mana-scribe';
+import { manaRegistry, ManaCost } from 'mana-scribe';
 
-colorRegistry.add({ id: 'P', name: 'Purple' });
+manaRegistry.addColor({ id: 'P', name: 'Purple' });
 const cost = ManaCost.parse('{3}{R/P}{P}');
 console.log(cost.symbols.map(s => s.type)); // ["genericMana", "twoColorHybridMana", "coloredMana"]
 console.log(cost.cmc); // 5
@@ -92,12 +92,12 @@ console.log(cost.getDevotionTo('P')); // 2
 
 ### Custom mana types
 
-You can add custom types of mana with `manaTypeRegistry.add`.
+You can add custom types of mana with `manaRegistry.addManaType`. This is for mana produced by specific sources, like snow mana.
 
 ```js
-import { manaTypeRegistry, ActivationCost } from 'mana-scribe';
+import { manaRegistry, ActivationCost } from 'mana-scribe';
 
-manaTypeRegistry.add({ id: 'A', name: 'Artificial' }); // mana produced by an artifact
+manaRegistry.addManaType({ id: 'A', name: 'Artificial' }); // mana produced by an artifact
 const cost = ActivationCost.parse('{A}{A}{T}');
 console.log(cost.symbols.map(s => s.type)); // ["typedMana", "typedMana", "tap"]
 console.log(cost.colors);  // []
