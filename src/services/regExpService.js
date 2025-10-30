@@ -1,11 +1,10 @@
-import colorRegistry from '../registries/ColorRegistry.js';
-import manaTypeRegistry from '../registries/ManaTypeRegistry.js';
+import customManaRegistry from './ManaRegistry.js';
 
 export function msr(str) {
-    const colors = colorRegistry.getValues('id').join('');
-    const manaTypes = manaTypeRegistry.getValues('id').join('');
+    const colorKeys = customManaRegistry.getColorKeys().join('');
+    const mTypeKeys = customManaRegistry.getManaTypeKeys().join('');
     const pstr = str.raw[0]
-        .replaceAll('\\c', '[' + colors + ']')
-        .replaceAll('\\T', '[' + manaTypes + ']');
+        .replaceAll('\\c', '[' + colorKeys + ']')
+        .replaceAll('\\T', '[' + mTypeKeys + ']');
     return new RegExp(`^({${pstr}}|${pstr})`, 'i');
 }

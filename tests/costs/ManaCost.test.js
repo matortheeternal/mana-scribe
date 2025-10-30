@@ -77,7 +77,7 @@ describe('ManaCost (E2E)', () => {
     describe('special symbols', () => {
         it('parses half mana', () => {
             const cost = ManaCost.parse('|G');
-            expect(cost.symbols[0].type).toBe('halfColoredMana');
+            expect(cost.symbols[0].type).toBe('halfMana');
             expect(cost.cmc).toBe(0.5);
             expect(cost.colors).toEqual(['G']);
         });

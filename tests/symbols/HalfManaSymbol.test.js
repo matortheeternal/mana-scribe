@@ -1,54 +1,54 @@
 import '../../src/index.js';
-import HalfColoredManaSymbol from '../../src/symbols/HalfColoredManaSymbol.js';
+import HalfManaSymbol from '../../src/symbols/HalfManaSymbol.js';
 
-describe('HalfColoredManaSymbol', () => {
+describe('HalfManaSymbol', () => {
     describe('fromString()', () => {
         it('creates a symbol from half-colored mana (braced and shortform)', () => {
-            const sym1 = HalfColoredManaSymbol.fromString('{|W}');
+            const sym1 = HalfManaSymbol.fromString('{|W}');
             expect(sym1.raw).toBe('|W');
             expect(sym1.colors).toEqual(['W']);
 
-            const sym2 = HalfColoredManaSymbol.fromString('|U');
+            const sym2 = HalfManaSymbol.fromString('|U');
             expect(sym2.raw).toBe('|U');
             expect(sym2.colors).toEqual(['U']);
         });
 
         it('parses all five colors', () => {
             for (const c of 'WUBRG') {
-                const sym = HalfColoredManaSymbol.fromString(`|${c}`);
+                const sym = HalfManaSymbol.fromString(`|${c}`);
                 expect(sym.colors).toEqual([c]);
                 expect(sym.cmcValue()).toBe(0.5);
             }
         });
 
         it('parses snow half symbol (S) as colorless', () => {
-            const sym = HalfColoredManaSymbol.fromString('|S');
+            const sym = HalfManaSymbol.fromString('|S');
             expect(sym.raw).toBe('|S');
             expect(sym.colors).toEqual([]); // no color
             expect(sym.cmcValue()).toBe(0.5);
         });
 
         it('is case insensitive', () => {
-            const sym = HalfColoredManaSymbol.fromString('{|g}');
+            const sym = HalfManaSymbol.fromString('{|g}');
             expect(sym.raw).toBe('|G');
             expect(sym.colors).toEqual(['G']);
         });
 
         it('throws for invalid input', () => {
-            expect(() => HalfColoredManaSymbol.fromString('|X')).toThrow();
-            expect(() => HalfColoredManaSymbol.fromString('W')).toThrow();
-            expect(() => HalfColoredManaSymbol.fromString('')).toThrow();
+            expect(() => HalfManaSymbol.fromString('|X')).toThrow();
+            expect(() => HalfManaSymbol.fromString('W')).toThrow();
+            expect(() => HalfManaSymbol.fromString('')).toThrow();
         });
     });
 
     describe('properties', () => {
-        it('has type halfColoredMana', () => {
-            const sym = HalfColoredManaSymbol.fromString('|B');
-            expect(sym.type).toBe('halfColoredMana');
+        it('has type halfMana', () => {
+            const sym = HalfManaSymbol.fromString('|B');
+            expect(sym.type).toBe('halfMana');
         });
 
         it('cmcValue is always 0.5', () => {
-            const sym = HalfColoredManaSymbol.fromString('|R');
+            const sym = HalfManaSymbol.fromString('|R');
             expect(sym.cmcValue()).toBe(0.5);
         });
     });
@@ -56,13 +56,13 @@ describe('HalfColoredManaSymbol', () => {
     describe('inherited methods', () => {
         it('apply() pushes to array', () => {
             const arr = [];
-            const sym = HalfColoredManaSymbol.fromString('|W');
+            const sym = HalfManaSymbol.fromString('|W');
             sym.apply(arr);
             expect(arr[0]).toBe(sym);
         });
 
         it('toString() outputs correctly', () => {
-            const sym = HalfColoredManaSymbol.fromString('{|U}');
+            const sym = HalfManaSymbol.fromString('{|U}');
             expect(sym.toString(false)).toBe('|U');
             expect(sym.toString(true)).toBe('{|U}');
         });
@@ -71,9 +71,9 @@ describe('HalfColoredManaSymbol', () => {
     describe('roundtrip', () => {
         it('parses and serializes symmetrically', () => {
             const input = '{|G}';
-            const sym1 = HalfColoredManaSymbol.fromString(input);
+            const sym1 = HalfManaSymbol.fromString(input);
             const str = sym1.toString(true);
-            const sym2 = HalfColoredManaSymbol.fromString(str);
+            const sym2 = HalfManaSymbol.fromString(str);
             expect(sym2.raw).toBe('|G');
             expect(sym2.colors).toEqual(['G']);
         });
