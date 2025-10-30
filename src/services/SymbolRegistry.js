@@ -3,7 +3,6 @@ import { AlreadyRegisteredError, SchemaError } from '../customErrors.js';
 const ReservedIds = {
     H: 'Phyrexian',
     I: 'Infinite Mana',
-    E: 'Energy',
     Q: 'Untap',
     T: 'Tap',
     X: 'Variable Mana',
@@ -11,10 +10,14 @@ const ReservedIds = {
     Z: 'Variable Mana',
 };
 
+function isEscapedChar(str) {
+    return str.length === 2 && str[0] === '\\';
+}
+
 function validateSchema(item, label) {
     if (!item.id || item.id.constructor !== String)
         throw new SchemaError(`${label} must have a string property "id"`);
-    if (item.id.length !== 1)
+    if (item.id.length !== 1 && !isEscapedChar(item.id))
         throw new SchemaError(`${label} property "id" length must be 1`);
     if (ReservedIds.hasOwnProperty(item.id))
         throw new SchemaError(
@@ -24,10 +27,11 @@ function validateSchema(item, label) {
         throw new SchemaError(`${label} must have a string property "name"`);
 }
 
-class ManaRegistry {
+class SymbolRegistry {
     constructor() {
         this.colors = new Map();
         this.manaTypes = new Map();
+        this.extraSymbols = new Map();
     }
 
     checkIfRegistered(key) {
@@ -35,6 +39,8 @@ class ManaRegistry {
             throw new AlreadyRegisteredError('Color', key);
         if (this.manaTypes.has(key))
             throw new AlreadyRegisteredError('ManaType', key);
+        if (this.extraSymbols.has(key))
+            throw new AlreadyRegisteredError('ExtraSym', key);
     }
 
     addColor(item) {
@@ -51,13 +57,24 @@ class ManaRegistry {
         this.manaTypes.set(key, item);
     }
 
-    getColorKeys() {
+    addExtraSym(item) {
+        validateSchema(item, 'ExtraSym');
+        const key = item.id;
+        this.checkIfRegistered(key);
+        this.extraSymbols.set(key, item);
+    }
+
+    get colorKeys() {
         return [...this.colors.keys()];
     }
 
-    getManaTypeKeys() {
+    get manaTypeKeys() {
         return [...this.manaTypes.keys()];
+    }
+
+    get extraSymKeys() {
+        return [...this.extraSymbols.keys()];
     }
 }
 
-export default new ManaRegistry();
+export default new SymbolRegistry();

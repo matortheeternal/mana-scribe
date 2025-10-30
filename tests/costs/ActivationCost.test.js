@@ -13,9 +13,9 @@ describe('ActivationCost (E2E)', () => {
             expect(cost.symbols[0].type).toBe('untap');
         });
 
-        it('parses energy symbol', () => {
+        it('parses extra symbols', () => {
             const cost = ActivationCost.parse('{E}');
-            expect(cost.symbols[0].type).toBe('energy');
+            expect(cost.symbols[0].type).toBe('extra');
         });
     });
 
@@ -32,7 +32,7 @@ describe('ActivationCost (E2E)', () => {
         it('parses {E}{W}{Q}', () => {
             const cost = ActivationCost.parse('{E}{W}{Q}');
             const types = cost.symbols.map(s => s.type);
-            expect(types).toEqual(['energy','coloredMana','untap']);
+            expect(types).toEqual(['extra','coloredMana','untap']);
             expect(cost.colors).toEqual(['W']);
         });
     });
@@ -41,7 +41,7 @@ describe('ActivationCost (E2E)', () => {
         it('parses lowercase {t}{q}{e}{w}', () => {
             const cost = ActivationCost.parse('{t}{q}{e}{w}');
             const types = cost.symbols.map(s => s.type);
-            expect(types).toEqual(['tap','untap','energy','coloredMana']);
+            expect(types).toEqual(['tap','untap','extra','coloredMana']);
             expect(cost.colors).toEqual(['W']);
         });
     });

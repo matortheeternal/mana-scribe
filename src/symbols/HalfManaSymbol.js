@@ -1,6 +1,6 @@
 import Symbol from './Symbol.js';
 import { msr } from '../services/regExpService.js';
-import { manaRegistry } from '../index.js';
+import { symbolRegistry } from '../index.js';
 
 export default class HalfManaSymbol extends Symbol {
     static match(str) {
@@ -9,7 +9,7 @@ export default class HalfManaSymbol extends Symbol {
 
     get colors() {
         const c = this.raw[1];
-        const colorIds = manaRegistry.getColorKeys();
+        const colorIds = symbolRegistry.colorKeys;
         return colorIds.includes(c) ? [c] : [];
     }
 
