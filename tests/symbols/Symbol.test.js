@@ -28,6 +28,13 @@ describe('Symbol class', () => {
         });
     });
 
+    describe('hybrid getter', () => {
+        it('should return false', () => {
+            const dummy = new DummySymbol(['{X}'], '{X}');
+            expect(dummy.hybrid).toEqual(false);
+        });
+    });
+
     describe('cmcValue getter', () => {
         it('should throw NotImplementedError when accessed', () => {
             const dummy = new DummySymbol(['{X}'], '{X}');

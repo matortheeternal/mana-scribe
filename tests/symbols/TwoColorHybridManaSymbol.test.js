@@ -39,6 +39,11 @@ describe('TwoColorHybridManaSymbol', () => {
             const sym = TwoColorHybridManaSymbol.fromString('{R/G}');
             expect(sym.cmcValue()).toBe(1);
         });
+
+        it('hybrid is true', () => {
+            const sym = TwoColorHybridManaSymbol.fromString('{B/W}');
+            expect(sym.hybrid).toBe(true);
+        });
     });
 
     describe('inherited methods', () => {
