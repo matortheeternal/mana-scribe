@@ -1,5 +1,6 @@
 import '../../src/index.js';
 import HybridPhyrexianManaSymbol from '../../src/symbols/HybridPhyrexianManaSymbol.js';
+import ThreeColorHybridManaSymbol from '../../src/symbols/ThreeColorHybridManaSymbol.js';
 
 describe('HybridPhyrexianManaSymbol', () => {
     describe('fromString()', () => {
@@ -65,6 +66,11 @@ describe('HybridPhyrexianManaSymbol', () => {
             const sym = HybridPhyrexianManaSymbol.fromString('{H/U/B}');
             expect(sym.toString(false)).toBe('H/U/B');
             expect(sym.toString(true)).toBe('{H/U/B}');
+        });
+
+        it('hybrid is true', () => {
+            const sym = HybridPhyrexianManaSymbol.fromString('{H/R/G}');
+            expect(sym.hybrid).toBe(true);
         });
     });
 

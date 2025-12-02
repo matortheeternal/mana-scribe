@@ -18,4 +18,8 @@ export default class HybridManaSymbol extends Symbol {
     cmcValue() {
         return 1;
     }
+
+    get hybrid() {
+        return true;
+    }
 }

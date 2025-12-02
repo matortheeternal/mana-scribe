@@ -34,6 +34,10 @@ export default class Symbol {
         return [];
     }
 
+    get hybrid() {
+        return false;
+    }
+
     apply(symbols) {
         symbols.push(this);
     }

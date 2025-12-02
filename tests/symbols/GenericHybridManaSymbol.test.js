@@ -1,5 +1,6 @@
 import '../../src/index.js';
 import GenericHybridManaSymbol from '../../src/symbols/GenericHybridManaSymbol.js';
+import ThreeColorHybridManaSymbol from '../../src/symbols/ThreeColorHybridManaSymbol.js';
 
 describe('GenericHybridManaSymbol', () => {
     describe('fromString()', () => {
@@ -47,6 +48,11 @@ describe('GenericHybridManaSymbol', () => {
         it('cmcValue is always 1', () => {
             const sym = GenericHybridManaSymbol.fromString('{2/U}');
             expect(sym.cmcValue()).toBe(1);
+        });
+
+        it('hybrid is true', () => {
+            const sym = GenericHybridManaSymbol.fromString('{2/R}');
+            expect(sym.hybrid).toBe(true);
         });
     });
 

@@ -1,5 +1,6 @@
 import '../../src/index.js';
 import FiveColorHybridManaSymbol from '../../src/symbols/FiveColorHybridManaSymbol.js';
+import ThreeColorHybridManaSymbol from '../../src/symbols/ThreeColorHybridManaSymbol.js';
 
 describe('FiveColorHybridManaSymbol', () => {
     describe('fromString()', () => {
@@ -40,6 +41,11 @@ describe('FiveColorHybridManaSymbol', () => {
         it('cmcValue is always 1', () => {
             const sym = FiveColorHybridManaSymbol.fromString('{W/U/B/R/G}');
             expect(sym.cmcValue()).toBe(1);
+        });
+
+        it('hybrid is true', () => {
+            const sym = FiveColorHybridManaSymbol.fromString('{W/U/B/R/G}');
+            expect(sym.hybrid).toBe(true);
         });
     });
 

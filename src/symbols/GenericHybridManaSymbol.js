@@ -17,4 +17,8 @@ export default class GenericHybridManaSymbol extends Symbol {
     cmcValue() {
         return 1;
     }
+
+    get hybrid() {
+        return true;
+    }
 }
