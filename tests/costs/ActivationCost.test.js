@@ -48,7 +48,7 @@ describe('ActivationCost (E2E)', () => {
 
     describe('serialization', () => {
         it('serializes back to string with braces', () => {
-            const input = '{2}{U}{T}{E}';
+            const input = '{E}{2}{U}{T}';
             const cost = ActivationCost.parse(input);
             expect(cost.toString(true)).toBe(input);
         });

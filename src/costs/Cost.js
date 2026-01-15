@@ -42,7 +42,7 @@ export default class Cost {
 
     toString(useBraces = false) {
         return this.symbols.sort((a, b) => {
-            return b.sortIndex - a.sortIndex;
+            return a.sortIndex - b.sortIndex;
         }).map(sym => {
             return sym.toString(useBraces);
         }).join('');

@@ -9,6 +9,7 @@ describe('Symbol registry', () => {
             sr.addColor({ id: 'P', name: 'Purple' });
             const cost = ManaCost.parse('{P}{P/R}{P/H}');
             expect(cost.colors).toEqual(['P', 'R']);
+            debugger;
             expect(cost.toString(true)).toBe('{P}{P/R}{P/H}');
         });
 

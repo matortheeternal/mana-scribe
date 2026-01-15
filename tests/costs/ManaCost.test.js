@@ -217,4 +217,36 @@ describe('ManaCost (E2E)', () => {
             expect(cost.remainingStr).toBe('QZ');
         });
     });
+
+    describe('ordering', () => {
+        it('should order infinity symbol first', () => {
+            const cost = ManaCost.parse('5CSWUBRGI');
+            expect(cost.toString()).toBe('I5SCWUBRG');
+        });
+
+        it('should order generic mana symbols before colored mana symbols', () => {
+            const cost = ManaCost.parse('WUBRG2');
+            expect(cost.toString()).toBe('2WUBRG');
+        });
+
+        it('should order variable mana symbols before generic mana symbols', () => {
+            const cost = ManaCost.parse('RYR2X');
+            expect(cost.toString()).toBe('YX2RR');
+        });
+
+        it('should order typed mana symbols after generic mana symbols', () => {
+            const cost = ManaCost.parse('S1R');
+            expect(cost.toString()).toBe('1SR');
+        });
+
+        it('should order colorless mana symbols after generic mana symbols', () => {
+            const cost = ManaCost.parse('C3');
+            expect(cost.toString()).toBe('3C');
+        });
+
+        it('should preserve colored symbol order', () => {
+            const cost = ManaCost.parse('WUR');
+            expect(cost.toString()).toBe('WUR');
+        });
+    })
 });
