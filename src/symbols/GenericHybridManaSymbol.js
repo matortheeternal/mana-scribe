@@ -7,7 +7,7 @@ export default class GenericHybridManaSymbol extends Symbol {
     }
 
     get colors() {
-        return this.raw.split('/').filter(c => 'WUBRG'.includes(c));
+        return this.raw.split('/').filter(c => msr`\c`.test(c));
     }
 
     get type() {
