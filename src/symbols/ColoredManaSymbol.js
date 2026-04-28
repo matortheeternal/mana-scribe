@@ -7,7 +7,7 @@ export default class ColoredManaSymbol extends Symbol {
     }
 
     get colors() {
-        return [this.raw];
+        return [this.raw.toUpperCase()];
     }
 
     get type() {

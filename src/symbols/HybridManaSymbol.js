@@ -12,7 +12,7 @@ export default class HybridManaSymbol extends Symbol {
     }
 
     get colors() {
-        return this.raw.split('/');
+        return this.raw.toUpperCase().split('/');
     }
 
     cmcValue() {

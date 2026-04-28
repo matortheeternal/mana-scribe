@@ -7,7 +7,7 @@ export default class HybridPhyrexianManaSymbol extends HybridManaSymbol {
     }
 
     get colors() {
-        return this.raw.split('/').filter(c => c !== 'H');
+        return this.raw.toUpperCase().split('/').filter(c => c !== 'H');
     }
 
     get type() {

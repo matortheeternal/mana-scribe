@@ -8,7 +8,7 @@ export default class HalfManaSymbol extends Symbol {
     }
 
     get colors() {
-        const c = this.raw[1];
+        const c = this.raw[1].toUpperCase();
         const colorIds = symbolRegistry.colorKeys;
         return colorIds.includes(c) ? [c] : [];
     }
