@@ -219,6 +219,29 @@ describe('ManaCost (E2E)', () => {
     });
 
     describe('ordering', () => {
+        const getPermutations = (symbols) => {
+            if (symbols.length <= 1) return [symbols[0].raw];
+            const result = [];
+            for (let i = 0; i < symbols.length; i++) {
+                const sym = symbols[i];
+                const remainingSymbols = [...symbols.slice(0, i), ...symbols.slice(i + 1)];
+                for (const permutation of getPermutations(remainingSymbols))
+                    result.push([sym.raw, ...permutation]);
+            }
+            return result;
+        };
+
+        const testAllPermutations = (str, curlies = false) => {
+            const cost = ManaCost.parse(str);
+            const permutations = getPermutations(cost.symbols);
+            permutations.forEach(p => {
+                const input = p.join('');
+                it(`should order ${input} as ${str}`, () => {
+                    expect(ManaCost.parse(input).toString(curlies)).toBe(str);
+                });
+            });
+        };
+
         it('should order infinity symbol first', () => {
             const cost = ManaCost.parse('5CSWUBRGI');
             expect(cost.toString()).toBe('I5SCWUBRG');
@@ -244,9 +267,66 @@ describe('ManaCost (E2E)', () => {
             expect(cost.toString()).toBe('3C');
         });
 
-        it('should preserve colored symbol order', () => {
-            const cost = ManaCost.parse('WUR');
-            expect(cost.toString()).toBe('WUR');
+        describe('two color symbol order', () => {
+            describe('Azorius', () => testAllPermutations('WU'));
+            describe('Dimir', () => testAllPermutations('UB'));
+            describe('Rakdos', () => testAllPermutations('BR'));
+            describe('Gruul', () => testAllPermutations('RG'));
+            describe('Selesnya', () => testAllPermutations('GW'));
+            describe('Orzhov', () => testAllPermutations('WB'));
+            describe('Izzet', () => testAllPermutations('UR'));
+            describe('Golgari', () => testAllPermutations('BG'));
+            describe('Boros', () => testAllPermutations('RW'));
+            describe('Simic', () => testAllPermutations('GU'));
+        });
+
+        describe('three color symbol order', () => {
+            describe('shards', () => {
+                describe('Bant', () => testAllPermutations('GWU'));
+                describe('Esper', () => testAllPermutations('WUB'));
+                describe('Grixis', () => testAllPermutations('UBR'));
+                describe('Jund', () => testAllPermutations('BRG'));
+                describe('Naya', () => testAllPermutations('RGW'));
+            });
+
+            describe('wedges', () => {
+                describe('Abzan', () => testAllPermutations('WBG'));
+                describe('Jeskai', () => testAllPermutations('URW'));
+                describe('Sultai', () => testAllPermutations('BGU'));
+                describe('Mardu', () => testAllPermutations('RWB'));
+                describe('Temur', () => testAllPermutations('GUR'));
+            });
+        });
+
+        describe('four color symbol order', () => {
+            describe('Non-Red', () => testAllPermutations('GWUB'));
+            describe('Non-Green', () => testAllPermutations('WUBR'));
+            describe('Non-White', () => testAllPermutations('UBRG'));
+            describe('Non-Blue', () => testAllPermutations('BRGW'));
+            describe('Non-Black', () => testAllPermutations('RGWU'));
+        });
+
+        describe('five color symbol order', () => {
+            describe('WUBRG', () => testAllPermutations('WUBRG'));
+        });
+
+        describe('hybrid symbol order', () => {
+            describe('three color', () => {
+                describe('Arsenal Thresher', () => testAllPermutations('2W/BU'));
+                describe('Bant Sureblade', () => testAllPermutations('G/UW'));
+                describe('Defibrillating Current', () => testAllPermutations('2/R2/W2/B'));
+                describe('Dragonclaw Strike', () => testAllPermutations('2/G2/U2/R'));
+                describe('Evelyn, the Covetous', () => testAllPermutations('2U/BBB/R'));
+            });
+
+            describe('four color', () => {
+                describe('The Fourteenth Doctor', () => testAllPermutations('R/GWU'));
+            });
+
+            describe('five color', () => {
+                describe('Leyline of the Guildpact', () => testAllPermutations('G/WG/UB/GR/G'));
+                describe('Providence of Night', () => testAllPermutations('W/UU/BB/RR/GG/W'));
+            });
         });
     })
 });

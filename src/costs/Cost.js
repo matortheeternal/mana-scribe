@@ -1,4 +1,5 @@
 import { NotImplementedError } from '../customErrors.js';
+import getSymbolOrder from '../symbolOrder.js';
 
 export default class Cost {
     static get allowedSymbols() {
@@ -40,9 +41,15 @@ export default class Cost {
         }
     }
 
-    toString(useBraces = false) {
-        return this.symbols.sort((a, b) => {
-            return a.sortIndex - b.sortIndex;
+    toString(useBraces = false, ordered = true) {
+        if (!ordered)
+            return this.symbols.map(sym => sym.toString(useBraces)).join('');
+
+        const symbolOrder = getSymbolOrder(this);
+        const getOrder = sym => symbolOrder.findIndex(fn => fn(sym));
+        
+        return [...this.symbols].sort((a, b) => {
+            return getOrder(a) - getOrder(b);
         }).map(sym => {
             return sym.toString(useBraces);
         }).join('');
