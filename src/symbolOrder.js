@@ -111,7 +111,7 @@ function getOrderColors(cost) {
 function getOrderRotation(cost) {
     const orderColors = getOrderColors(cost);
     const hasCustomColors = orderColors.some(color => {
-        return baseColors.indexOf(color.toUpperCase()) === -1;
+        return !baseColors.includes(color);
     });
     const strategy = colorOffsetStrategies.find(strategy => {
         return strategy.test(orderColors.length, hasCustomColors);
