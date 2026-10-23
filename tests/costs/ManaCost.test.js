@@ -52,6 +52,13 @@ describe('ManaCost (E2E)', () => {
             expect(cost.colors.sort()).toEqual(['G','U']);
         });
 
+        it('parses colorless hybrid', () => {
+            const cost = ManaCost.parse('C/RC/U');
+            expect(cost.symbols[0].type).toBe('colorlessHybridMana');
+            expect(cost.cmc).toBe(2);
+            expect(cost.colors).toEqual(['R', 'U']);
+        });
+
         it('parses generic hybrid', () => {
             const cost = ManaCost.parse('2/W');
             expect(cost.symbols[0].type).toBe('genericHybridMana');
