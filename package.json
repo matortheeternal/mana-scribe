@@ -1,6 +1,6 @@
 {
   "name": "mana-scribe",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "Library for parsing and querying Magic: The Gathering mana costs — with support for CMC, devotion, and color identity.",
   "keywords": [
     "mtg",
@@ -10,11 +10,11 @@
     "parser"
   ],
   "bugs": {
-    "url": "https://codeberg.org/mator/mana-scribe/issues"
+    "url": "https://github.com/matortheeternal/mana-scribe/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://codeberg.org/mator/mana-scribe.git"
+    "url": "github:matortheeternal/mana-scribe"
   },
   "license": "MIT",
   "author": "mator",

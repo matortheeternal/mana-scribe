@@ -21,6 +21,14 @@ export default class Cost {
         return [...set];
     }
 
+    get orderedSymbols() {
+        const symbolOrder = getSymbolOrder(this);
+        const getOrder = sym => symbolOrder.findIndex(fn => fn(sym));
+        return [...this.symbols].sort((a, b) => {
+            return getOrder(a) - getOrder(b);
+        })
+    }
+
     parseSymbols(str) {
         let remainingStr = str.trim();
         while (remainingStr.length) {
@@ -42,16 +50,7 @@ export default class Cost {
     }
 
     toString(useBraces = false, ordered = true) {
-        if (!ordered)
-            return this.symbols.map(sym => sym.toString(useBraces)).join('');
-
-        const symbolOrder = getSymbolOrder(this);
-        const getOrder = sym => symbolOrder.findIndex(fn => fn(sym));
-        
-        return [...this.symbols].sort((a, b) => {
-            return getOrder(a) - getOrder(b);
-        }).map(sym => {
-            return sym.toString(useBraces);
-        }).join('');
+        const symbols = ordered ? this.orderedSymbols : this.symbols;
+        return symbols.map(sym => sym.toString(useBraces)).join('');
     }
 }

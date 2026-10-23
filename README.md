@@ -44,6 +44,23 @@ console.log(cost.cmc);     // 4
 console.log(cost.colors);  // ['W','U','B']
 ```
 
+### Ordering
+Mana symbols have a canonical order, and Mana Scribe can normalize to that order.
+
+- `toString` orders by default. You can pass `false` to its second argument to retain input order.
+- Use `symbols` to access unordered symbols.
+- Use `orderedSymbols` to access ordered symbols.
+
+
+```js
+const cost = ManaCost.parse('{G}{W}{R}{U}{C}{B}{G}{R}{B}{W}{U}');
+
+console.log(cost.toString()); // CWWUUBBRRGG
+console.log(cost.toString(false, false)); // GWRUCBGRBWU
+console.log(cost.orderedSymbols.map(s => s.raw)); 
+// ["{C}", "{W}", "{W}", "{U}", "{U}", "{B}", "{B}", "{R}", "{R}", "{G}", "{G}"]
+```
+
 ### Comparison example
 The `ManaCost` class supports equality and comparison operators under superset semantics:
 

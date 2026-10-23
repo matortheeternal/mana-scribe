@@ -1,5 +1,4 @@
 import { NotImplementedError } from '../customErrors.js';
-import symbolOrder from '../symbolOrder.js';
 
 export default class Symbol {
     static match(str) {
@@ -37,10 +36,6 @@ export default class Symbol {
 
     get hybrid() {
         return false;
-    }
-
-    get sortIndex() {
-        return symbolOrder.findIndex(rule => rule(this));
     }
 
     apply(symbols) {
