@@ -23,7 +23,7 @@ export default class ActivationCost extends Cost {
     static get allowedSymbols() {
         return [
             HybridPhyrexianManaSymbol, ColoredPhyrexianManaSymbol,
-            GenericHybridManaSymbol, ColorlessHybridManaSymbol,
+            ColorlessHybridManaSymbol, GenericHybridManaSymbol,
             FiveColorHybridManaSymbol, FourColorHybridManaSymbol,
             ThreeColorHybridManaSymbol, TwoColorHybridManaSymbol, HalfManaSymbol,
             ColorlessPhyrexianManaSymbol, GenericManaSymbol, VariableManaSymbol,
